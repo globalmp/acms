@@ -1,0 +1,60 @@
+<?php
+use yii\helpers\Html;
+use yii\bootstrap\ActiveForm;
+use yii\captcha\Captcha;
+use app\models\User;
+use app\models\Servers;
+use yii\widgets\Blocks;
+
+$this->title = 'Перечень всех серверов';
+$this->params['breadcrumbs'][] = $this->title;
+?>
+
+
+                    <div class="panel panel-filled">
+                        <div class="panel-heading">
+                            <div class="panel-tools">
+                                <?= Html::a("Добавить новый сайт", array('service/addserver'), array('class'=>'btn btn-w-md btn-success')) ?>
+                            </div>
+                            Перечень всех ваших сайтов
+                        </div>
+                        <div class="panel-body">
+                        	<p>Список всех запаркованных на вашей системе сайтов</p>
+                            <div class="table-responsive">
+
+
+								<table class="table table-striped table-hover" id="tableExample3">
+
+                                    <thead>
+                                    <tr>
+                                    	<th>№</th>
+                                        <th>Название</th>
+                                        <th>Домен</th>
+                                        <th>Заголовок сайта</th>
+                                        <th>Операции</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+								    <?php foreach ($data as $post): ?>
+								        <tr>
+								            <td width="40px">
+								                <?php echo Html::a($post->id, array('service/updateserver', 'id'=>$post->id)); ?>
+								            </td>
+								            <td><?php echo Html::a($post->name, array('service/updateserver', 'id'=>$post->id)); ?></td>
+								            <td><?php echo Html::a($post->host, array('service/updateserver', 'id'=>$post->id)); ?></td>
+								            <td><?php echo (($post->title)?$post->title:"<small>Пока еще нет =(</small>"); ?></td>
+								            <td width="100px">
+								                <?php echo Html::a(NULL, array('service/updateserver', 'id'=>$post->id), array('class'=>'btn btn-default btn-sm pe pe-7s-edit')); ?>
+								                <?php echo Html::a(NULL, array('service/deleteserver', 'id'=>$post->id), array('data-protected'=>"true",'class'=>'btn btn-default btn-sm pe pe-7s-trash')); ?>
+												
+											
+											</td>
+								        </tr>
+								    <?php endforeach; ?>
+								    </tbody>
+								</table>
+
+								</div>
+
+                        </div>
+                    </div>
